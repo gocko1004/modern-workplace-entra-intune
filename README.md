@@ -9,6 +9,8 @@
 A personal lab, not production: one Microsoft 365 trial tenant, Windows 11 virtual machines in
 Hyper-V, and one Android phone. Built from nothing on 17 August 2026, taken through all five MD-102
 domains by 14 September, then torn down with scripts and rebuilt from scratch from 15 September.
+In October, an identity part: an emergency access account with a passkey, and Conditional Access
+built in report-only, tested, then switched on.
 
 A multiple-choice exam cannot show what this repo shows: the failures, the exact error text, what I
 checked, and what it turned out to be.
@@ -50,7 +52,8 @@ What the lab puts in place, written for the question a small business actually a
 | A laptop is lost or stolen | BitLocker by policy, recovery key stored in Entra ID and readable by IT only | [Day 4](day-guides/day-04-compliance-configuration-and-bitlocker.md#4-bitlocker), [Day 13](LAB-LOG.md#day-13-three-recovery-keys-one-disk), [rebuild](rebuild/README.md#bitlocker-policy-takes-over) |
 | Every PC has the same local admin password | Windows LAPS: one password per device, rotated, retrievable by IT | [Day 9](LAB-LOG.md#day-9-windows-laps-returned-0x80070190-and-the-portal-said-nothing-useful) |
 | Someone installs a "free tool" bundled with adware | Defender blocks potentially unwanted apps, Edge SmartScreen blocks their downloads | [Day 13](LAB-LOG.md#day-13-the-antivirus-policy-was-enforcing-an-insecure-value), [rebuild](rebuild/README.md#edge-smartscreen) |
-| An unhealthy or unmanaged device reaches company data | Compliance policy, devices with no policy marked non-compliant by default, Conditional Access requiring a compliant device, and the MFA gap that switching off security defaults opened, recorded rather than hidden | [Day 7](day-guides/day-07-orphaned-devices-policy-stores-and-admx.md#the-default-that-fails-open), [Day 15](LAB-LOG.md#day-15-conditional-access-and-the-multifactor-authentication-gap-it-created) |
+| An unhealthy or unmanaged device reaches company data | Compliance policy, devices with no policy marked non-compliant by default, Conditional Access requiring a compliant device, and the MFA gap that switching off security defaults opened, recorded, then closed in October | [Day 7](day-guides/day-07-orphaned-devices-policy-stores-and-admx.md#the-default-that-fails-open), [Day 15](LAB-LOG.md#day-15-conditional-access-and-the-multifactor-authentication-gap-it-created), [identity](identity/README.md) |
+| A stolen password is enough to sign in | Conditional Access requires MFA for every user except one emergency account, and blocks the old protocols that cannot do MFA. The emergency account, with a passkey and an offline password, keeps the tenant reachable if a policy goes wrong | [Identity](identity/README.md#4-conditional-access) |
 | Ransomware-style behaviour, credential theft | Attack surface reduction rules, deployed in audit mode first, then one promoted to block | [Day 14](LAB-LOG.md#day-14-attack-surface-reduction-audit-first) |
 | Old protocols left switched on | SMBv1 disabled, and the setting whose label says the opposite caught | [Day 7](day-guides/day-07-orphaned-devices-policy-stores-and-admx.md#the-smbv1-trap) |
 | Too many people with full admin rights | Least-privilege roles, device join limited, Endpoint Privilege Management for one-off elevation | [Day 2](day-guides/day-02-users-groups-and-tenant-device-settings.md), [Day 14](LAB-LOG.md#day-14-endpoint-privilege-management) |
@@ -62,6 +65,7 @@ What the lab puts in place, written for the question a small business actually a
 | Area | Covered | Where |
 |---|---|---|
 | Tenant and identity | Licensing, bulk users with Microsoft Graph PowerShell, assigned and dynamic groups, roles, Entra device settings | [Days 1 and 2](day-guides/) |
+| Identity and access | Emergency access account, Temporary Access Pass, passkey in Authenticator, Conditional Access with What If and report-only checks, a read-only PowerShell audit through Microsoft Graph | [Identity](identity/README.md) |
 | Enrolment | Entra join versus register, automatic enrolment, `dsregcmd`, errors 80180003 and 801c03ed | [Days 3 and 6](day-guides/) |
 | Windows Autopilot | Hardware hash, deployment profile, Enrollment Status Page, end-to-end deployment, orphaned device recovery | [Days 5 to 7](day-guides/), [rebuild](rebuild/README.md) |
 | Compliance and configuration | Compliance policies, Device Health Attestation, settings catalog, administrative templates, assignment filters | [Days 4, 7, 8](day-guides/) |

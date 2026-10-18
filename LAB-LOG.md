@@ -1031,7 +1031,7 @@ remediation as **Without issues**.
    Two Windows sessions active, zero recognised as Microsoft Entra sessions, so zero script policies
    retrieved.
 
-5. `whoami` returned `azuread\gocepetrov`, so the account was right. `dsregcmd /status` showed why:
+5. `whoami` returned `azuread\admin`, so the account was right. `dsregcmd /status` showed why:
 
 ```
 DeviceAuthStatus : FAILED. Error: 0xd000023c
@@ -1226,3 +1226,41 @@ loader.
 
 **`801C03ED` at sign-in.** "Users may join devices to Microsoft Entra ID" was on Selected. The teardown
 log recorded that setting as reset to defaults. The log was wrong and the tenant was right.
+
+---
+
+## Identity, 17 and 18 October 2026
+
+Full record in [identity/README.md](identity/README.md). Summary:
+
+Started from the gap Day 15 left open: security defaults off and no Conditional Access policy, so
+nothing required multifactor authentication for users.
+
+Built the emergency access account first: cloud-only, Global Administrator, in a role-assignable
+exclusion group, with an offline password and a passkey in Authenticator. The passkey was registered through
+a one-time Temporary Access Pass, then the push and code methods Authenticator added alongside it
+were removed. Tested with a real sign-in.
+
+Then three Conditional Access policies in report-only: MFA for all users, legacy authentication
+blocked, compliant device for the test user on Windows. Checked with What If for the test user and
+for the emergency account, then with one real sign-in from the VM, then switched on.
+
+Worth keeping:
+
+**The lock-out warning pre-selects "Exclude current user".** That is Microsoft's safeguard, and right
+in a tenant without an emergency account. Here it would have exempted the daily Global Administrator
+from the MFA policy.
+
+**The real sign-in was on the other tab.** After opening Outlook on the web in Edge on the joined VM,
+the interactive log held only the Windows sign-in. The Edge sign-ins, with the report-only results,
+were in the non-interactive log.
+
+**A script found what What If could not,** once it also listed excluded users. A read-only PowerShell
+audit through Microsoft Graph showed
+that all three policies excluded the emergency user, not the protected `EmergencyAccess` group. What
+If gives the same answer for both. Changed all three to the group and re-ran the script to confirm.
+
+**The emergency account was used for real the day after it was built.** The daily admin could not
+complete MFA on a fresh sign-in. The emergency account issued it a one-time Temporary Access Pass,
+and Authenticator was registered with it.
+

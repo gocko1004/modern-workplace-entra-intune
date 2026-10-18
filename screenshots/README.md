@@ -60,6 +60,27 @@ happened. The full story is on the linked page.
 |---|---|---|---|
 | `14-lab-day15-whatif-report-only.png` | What If: `CA-Require-Compliant-Device` under Policies that will apply, State Report-only | Verified with the simulator rather than a sign-in, because the admin account is excluded from the policy | [Lab log, Day 15](../LAB-LOG.md#day-15-conditional-access-and-the-multifactor-authentication-gap-it-created) |
 
+## Identity and access
+
+| Screenshot | What it shows | Why it matters | Page |
+|---|---|---|---|
+| `17-identity-ca-no-policies.png` | Conditional Access policies page on its Get Started screen: no policies | The Day 15 policy was gone after the teardown, and nothing replaced it | [Identity](../identity/README.md#where-it-started) |
+| `18-identity-security-defaults-disabled.png` | Security defaults **Disabled** | With no policy either, **nothing required MFA for users**, a month after Day 15 recorded the gap | [Identity](../identity/README.md#where-it-started) |
+| `19-identity-tap-signin-auth-details.png` | A sign-in authenticated with a **Temporary Access Pass** | How an account with no methods gets its first strong one, to register a passkey | [Identity](../identity/README.md#2-a-passkey-on-an-account-with-no-methods) |
+| `20-identity-emergency-passkey-only.png` | Emergency account with one usable method, a **passkey**; system-preferred method Fido2 | **Authenticator had also added push and codes**, both phishable. Removed | [Identity](../identity/README.md#2-a-passkey-on-an-account-with-no-methods) |
+| `21-identity-passkey-aaguid.png` | The passkey's AAGUID | The value Authenticator on Android reports. Graph records this passkey as attested; the profile does not require it, so an unattested passkey would also have been accepted | [Identity](../identity/README.md#2-a-passkey-on-an-account-with-no-methods) |
+| `22-identity-ca-lockout-warning.png` | "Don't lock yourself out!" with **Exclude current user** pre-selected | Microsoft's safeguard, wrong here: the emergency account is the safeguard, and the default would exempt the daily admin from MFA | [Identity](../identity/README.md#4-conditional-access) |
+| `23-identity-whatif-test-user.png` | What If result for the test user: CA001 and CA003 apply, report-only | Simulated before anything was switched on. Inputs are listed on the page | [Identity](../identity/README.md#what-if-before-anything-went-on) |
+| `24-identity-whatif-emergency-excluded.png` | What If result for the emergency account: no policy applies, reason **Users and groups** | The exclusion holds for all three policies | [Identity](../identity/README.md#what-if-before-anything-went-on) |
+| `25-identity-reportonly-edge-signin.png` | Report-only results on a real Microsoft Edge sign-in: CA001 and CA003 Success, CA002 Not applied | **Found in the non-interactive log**, not the interactive one | [Identity](../identity/README.md#one-real-sign-in-still-in-report-only) |
+| `26-identity-ca-policies-on.png` | CA001, CA002 and CA003, all three **On** | Switched on only after What If and the report-only sign-in agreed | [Identity](../identity/README.md#switched-on) |
+| `29-identity-audit-exclusion-was-the-user.png` | PowerShell audit: all three policies exclude the **user** Emergency Access 01, no group | **What If could not show this.** The protected group did nothing until the policies named it | [Identity](../identity/README.md#the-exclusion-was-the-user-not-the-group) |
+| `30-identity-audit-exclusion-fixed.png` | The same check after the fix: all three exclude the group `EmergencyAccess` | Fix verified by re-reading, not assumed | [Identity](../identity/README.md#the-exclusion-was-the-user-not-the-group) |
+| `31-identity-audit-emergency-signins.png` | Emergency account sign-ins with the method used | **The passkey sits on the error 50140 entry**, the "Stay signed in?" prompt, not on the success after it | [Identity](../identity/README.md#sign-ins-and-which-entry-carries-the-method) |
+| `32-identity-audit-test-user-signins.png` | Test user sign-ins, and app registrations holding client secrets | Windows Hello for Business explains CA001's report-only success. No client secrets on app registrations | [Identity](../identity/README.md#sign-ins-and-which-entry-carries-the-method) |
+| `27-identity-2025-service-principal-secret-login.png` | October 2025: a pipeline signing in to Azure as a service principal with a client secret | The secret is stored in GitHub and handed to the run | [Workload identity](../identity/workload-identity-2025.md#the-pipeline-with-a-secret) |
+| `28-identity-2025-pipeline-secret-readable.png` | An untrusted step given `AZURE_CLIENT_SECRET`, printed as `***` | **Masking hides the value from the log, not from the code** | [Workload identity](../identity/workload-identity-2025.md#the-pipeline-with-a-secret) |
+
 ## Applications
 
 | Screenshot | What it shows | Why it matters | Page |
