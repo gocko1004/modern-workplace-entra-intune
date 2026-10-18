@@ -1,3 +1,5 @@
+[Version française](fr/README.md)
+
 # Modern Workplace with Microsoft Entra ID and Intune
 
 **Goce Petrov** · Switzerland · Microsoft MD-102 (Endpoint Administrator) in preparation, hands-on in my own Microsoft 365 tenant
