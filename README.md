@@ -1,12 +1,13 @@
-# Microsoft Intune and Entra ID lab
+# Modern Workplace with Microsoft Entra ID and Intune
 
-**Goce Petrov** · Switzerland · Microsoft MD-102 (Endpoint Administrator) in preparation, hands-on labs
+**Goce Petrov** · Switzerland · Microsoft MD-102 (Endpoint Administrator) in preparation, hands-on in my own Microsoft 365 tenant
 
-> **En bref.** Laboratoire personnel Microsoft Intune et Entra ID, monté et dépanné par moi depuis
-> août 2026. Chaque panne est documentée : le message d’erreur exact, ce que j’ai vérifié, la cause,
-> la correction. Les pages sont en anglais, la langue des consoles Microsoft.
+> **En bref.** Environnement Microsoft Entra ID et Intune, monté et dépanné par moi dans mon propre
+> locataire Microsoft 365 depuis août 2026. Chaque panne est documentée : le message d’erreur exact,
+> ce que j’ai vérifié, la cause, la correction. Les pages sont en anglais, la langue des consoles
+> Microsoft.
 
-A personal lab, not production: one Microsoft 365 trial tenant, Windows 11 virtual machines in
+My own environment, not production: one Microsoft 365 trial tenant, Windows 11 virtual machines in
 Hyper-V, and one Android phone. Built from nothing on 17 August 2026, taken through all five MD-102
 domains by 14 September, then torn down with scripts and rebuilt from scratch from 15 September.
 In October, an identity part: an emergency access account with a passkey, and Conditional Access
@@ -89,7 +90,7 @@ and BitLocker by policy, each verified on the device.
 
 ## Not here, said plainly
 
-- **Production experience.** This is a lab: one virtual machine at a time, test users only.
+- **Production experience.** This is my own trial tenant: one virtual machine at a time, test users only.
 - **Apple devices, on-premises Active Directory, Group Policy, Configuration Manager.** No hardware,
   no domain. Understood on paper only.
 - **Copilot in Intune and Windows 365.** Explored as far as licensing allowed, not built.
