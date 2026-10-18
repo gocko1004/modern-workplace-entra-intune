@@ -7,7 +7,7 @@
 > **En bref.** Environnement Microsoft Entra ID et Intune, monté et dépanné par moi dans mon propre
 > locataire Microsoft 365 depuis août 2026. Chaque panne est documentée : le message d’erreur exact,
 > ce que j’ai vérifié, la cause, la correction. Les pages sont en anglais, la langue des consoles
-> Microsoft.
+> Microsoft. Version française complète : [fr/README.md](fr/README.md).
 
 My own environment, not production: one Microsoft 365 trial tenant, Windows 11 virtual machines in
 Hyper-V, and one Android phone. Built from nothing on 17 August 2026, taken through all five MD-102
