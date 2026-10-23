@@ -4,10 +4,10 @@ Taken in my tenant and redacted before upload. Tenant name, tenant and device ID
 serial numbers, recovery keys and passwords are blacked out, not blurred.
 
 Numbered in the order of the guided tour in [ARCHITECTURE.md](../ARCHITECTURE.md). Each heading below
-is a step of the tour, with its title in the diagram in brackets. Steps 1, 2 and 8 are shown live in
-the portals, not in screenshots.
+is a step of the tour, with the same title as in the diagram. Steps 1, 2 and 8 are shown live in the
+portals, not in screenshots.
 
-## Step 3 · Never lose access (Ne jamais perdre l'accès)
+## Step 3 · Never lose access
 
 | Screenshot | What it shows | Why it matters | Page |
 |---|---|---|---|
@@ -15,7 +15,7 @@ the portals, not in screenshots.
 | `02-emergency-access-passkey-only.png` | Emergency account with one usable method, a **passkey**; system-preferred method Fido2 | **Authenticator had also added push and codes**, both phishable. Removed | [Identity](../identity/README.md#2-a-passkey-on-an-account-with-no-methods) |
 | `03-emergency-access-passkey-aaguid.png` | The passkey's AAGUID | The value Authenticator on Android reports. Graph records this passkey as attested; the profile does not require it, so an unattested passkey would also have been accepted | [Identity](../identity/README.md#2-a-passkey-on-an-account-with-no-methods) |
 
-## Step 4 · Access rules (Les règles d'accès)
+## Step 4 · Access rules
 
 | Screenshot | What it shows | Why it matters | Page |
 |---|---|---|---|
@@ -27,7 +27,7 @@ the portals, not in screenshots.
 | `09-access-rules-report-only-sign-in.png` | Report-only results on a real Microsoft Edge sign-in: CA001 and CA003 Success, CA002 Not applied | **Found in the non-interactive log**, not the interactive one | [Identity](../identity/README.md#one-real-sign-in-still-in-report-only) |
 | `10-access-rules-ca001-ca002-ca003-on.png` | CA001, CA002 and CA003, all three **On** | Switched on only after What If and the report-only sign-in agreed | [Identity](../identity/README.md#switched-on) |
 
-## Step 5 · The workstation (Le poste de travail)
+## Step 5 · The workstation
 
 | Screenshot | What it shows | Why it matters | Page |
 |---|---|---|---|
@@ -38,7 +38,7 @@ the portals, not in screenshots.
 | `15-workstation-cp-windows-compliant.png` | `CP-Windows` per setting: nine settings Compliant, 0 Not applicable | A Not applicable line was never checked. Zero means every check actually ran | [Rebuild](../rebuild/README.md#compliance) |
 | `16-workstation-cfg-edge-smartscreen.png` | `edge://policy`: four SmartScreen policies true, Platform, Device, Mandatory, OK | The download switch belongs to Edge, so the Defender policy could not set it | [Rebuild](../rebuild/README.md#edge-smartscreen) |
 
-## Step 6 · Check, don't assume (Vérifier, pas supposer)
+## Step 6 · Check, don't assume
 
 | Screenshot | What it shows | Why it matters | Page |
 |---|---|---|---|
@@ -52,7 +52,7 @@ the portals, not in screenshots.
 | `24-checks-bitlocker-three-recovery-keys.png` | Three recovery keys listed for one drive | Not a fault. Every encryption and every rotation escrows a new key and the old ones stay, which is why the recovery screen shows a Key ID | [Lab log, Day 13](../LAB-LOG.md#day-13-three-recovery-keys-one-disk) |
 | `25-checks-defender-pua-protection-off.png` | Antivirus policy with **PUA Protection off** | **Insecure value enforced.** An explicit "off" overrides the device and still reports as applied. Fixed by setting it to block | [Lab log, Day 13](../LAB-LOG.md#day-13-the-antivirus-policy-was-enforcing-an-insecure-value) |
 
-## Step 7 · Tear down and rebuild (Démolir et reconstruire)
+## Step 7 · Tear down and rebuild
 
 Built in the first round, before the September teardown.
 

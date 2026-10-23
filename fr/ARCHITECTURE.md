@@ -2,11 +2,11 @@
 
 # Architecture
 
-Le tenant en un schéma, parcouru en huit étapes. Je le présente en direct, sous forme de page interactive ;
-voici le même schéma en image, puis les mêmes huit étapes avec leurs captures. Chaque nom de cette page est
-celui du schéma, et les captures sont numérotées dans l'ordre de la visite.
+Le tenant en un schéma, parcouru en huit étapes. Je le présente en direct sous forme de page interactive, en
+français ou en anglais ; voici le même schéma en image, puis les mêmes huit étapes avec leurs captures. Chaque
+nom de cette page est celui du schéma, et les captures sont numérotées dans l'ordre de la visite.
 
-![Le schéma du tenant, tel que je le présente](../architecture/tenant-architecture.png)
+![Le schéma du tenant](../architecture/tenant-architecture-fr.png)
 
 *Utilisatrice test* dans le schéma est `lea.test` dans le reste du dépôt.
 
