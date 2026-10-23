@@ -74,7 +74,7 @@ Lea s'est connectée, la jonction Entra a réussi, et l'Enrollment Status Page e
 modèle de nom n'existe que dans le profil de déploiement Autopilot, donc cela prouve que c'est le profil
 qui a piloté la configuration, et non une jonction professionnelle ou scolaire ordinaire.
 
-![Rapport de chiffrement Intune listant CORP-97322, nom d'utilisateur principal masqué](../../screenshots/06-rebuild-corp-97322-in-intune.png)
+![Rapport de chiffrement Intune listant CORP-97322, nom d'utilisateur principal masqué](../../screenshots/14-workstation-corp-97322-encrypted.png)
 
 **Confirmé le 29 septembre :** Secure Boot et le TPM sont de nouveau actifs via `05-harden-vm.ps1`, et la
 machine démarre. Windows Security dans l'invité signale le processeur de sécurité présent et Secure Boot
@@ -103,7 +103,7 @@ est le choix sûr. Encore un paramètre de tenant qui a survécu au démontage.
 **Confirmé le 5 octobre : Compliant.** État par paramètre pour `CORP-97322` : les neuf paramètres à 1
 Compliant, **0 Not applicable**.
 
-![État par paramètre pour CP-Windows : neuf paramètres, chacun à 1 Compliant et 0 Not applicable, identifiants masqués](../../screenshots/07-rebuild-compliance-per-setting.png)
+![État par paramètre pour CP-Windows : neuf paramètres, chacun à 1 Compliant et 0 Not applicable, identifiants masqués](../../screenshots/15-workstation-cp-windows-compliant.png)
 
 Le zéro compte. Une ligne Not applicable n'a jamais été vérifiée, et l'état global affiche quand même
 Compliant dans ce cas. Les trois lignes Device Health viennent du rapport d'intégrité que Windows écrit au
@@ -188,7 +188,7 @@ Vérifié dans Edge sur l'appareil, `edge://policy` :
 | PreventSmartScreenPromptOverride | true | Platform | Device | Mandatory | OK |
 | PreventSmartScreenPromptOverrideForFiles | true | Platform | Device | Mandatory | OK |
 
-![edge://policy sur l'appareil : les quatre stratégies SmartScreen à true, Platform, Device, Mandatory, OK](../../screenshots/08-rebuild-edge-policy-smartscreen.png)
+![edge://policy sur l'appareil : les quatre stratégies SmartScreen à true, Platform, Device, Mandatory, OK](../../screenshots/16-workstation-cfg-edge-smartscreen.png)
 
 Source **Platform** signifie livré par la stratégie Windows, ce qui est la voie par laquelle Intune arrive,
 par opposition à la gestion cloud propre à Edge. Applies To **Device** confirme que ce sont bien les

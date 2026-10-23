@@ -73,7 +73,7 @@ three stages to a desktop.
 name template exists only in the Autopilot deployment profile, so this proves the profile drove
 setup rather than an ordinary work or school join.
 
-![Intune encryption report listing CORP-97322, user principal name blacked out](../screenshots/06-rebuild-corp-97322-in-intune.png)
+![Intune encryption report listing CORP-97322, user principal name blacked out](../screenshots/14-workstation-corp-97322-encrypted.png)
 
 **Confirmed 29 September:** Secure Boot and the TPM are back on through `05-harden-vm.ps1`, and the
 machine boots. Windows Security inside the guest reports the security processor present and Secure
@@ -102,7 +102,7 @@ tenant setting that survived the teardown.
 **Confirmed 5 October: Compliant.** Per-setting status for `CORP-97322`: all nine settings 1
 Compliant, **0 Not applicable**.
 
-![Per-setting status for CP-Windows: nine settings, each 1 Compliant and 0 Not applicable, IDs blacked out](../screenshots/07-rebuild-compliance-per-setting.png)
+![Per-setting status for CP-Windows: nine settings, each 1 Compliant and 0 Not applicable, IDs blacked out](../screenshots/15-workstation-cp-windows-compliant.png)
 
 The zero matters. A Not applicable line was never checked, and the overall status still reads
 Compliant when that happens. The three Device Health lines come from the health report Windows
@@ -184,7 +184,7 @@ Verified in Edge on the device, `edge://policy`:
 | PreventSmartScreenPromptOverride | true | Platform | Device | Mandatory | OK |
 | PreventSmartScreenPromptOverrideForFiles | true | Platform | Device | Mandatory | OK |
 
-![edge://policy on the device: the four SmartScreen policies true, Platform, Device, Mandatory, OK](../screenshots/08-rebuild-edge-policy-smartscreen.png)
+![edge://policy on the device: the four SmartScreen policies true, Platform, Device, Mandatory, OK](../screenshots/16-workstation-cfg-edge-smartscreen.png)
 
 Source **Platform** means delivered through Windows policy, which is how Intune arrives, as opposed
 to Edge's own cloud management. Applies To **Device** confirms the machine versions arrived.

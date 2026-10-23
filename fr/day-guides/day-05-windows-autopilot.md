@@ -117,7 +117,7 @@ Paramètres utilisés :
 - Deployment mode: **User-Driven**
 - Join to Microsoft Entra ID as: **Microsoft Entra joined**
 
-![Profil Autopilot APUserDrivenEntraJoin à l'étape Review and create : User-Driven, Microsoft Entra joined](../../screenshots/10-day05-autopilot-profile-user-driven.png)
+![Profil Autopilot APUserDrivenEntraJoin à l'étape Review and create : User-Driven, Microsoft Entra joined](../../screenshots/13-workstation-autopilot-apuserdrivenentrajoin.png)
 
 ## 5. La règle de groupe : la partie qui décide si tout cela fonctionne
 
@@ -149,7 +149,7 @@ Dans le formulaire de création du groupe, **Microsoft Entra roles can be assign
 
 Appartenance confirmée : `LABVMGOCE` présent. Profil réaffecté à `Dyn-Autopilot-Devices`. L'état du profil est passé à **Assigned**.
 
-![Membres de Dyn-Autopilot-Devices : 1 group member found, LABVMGOCE](../../screenshots/09-day05-ztdid-group-member-found.png)
+![Membres de Dyn-Autopilot-Devices : 1 group member found, LABVMGOCE](../../screenshots/12-workstation-dyn-autopilot-devices.png)
 
 ## 6. La page d'état d'inscription
 

@@ -16,11 +16,11 @@ Vérifié avant de changer quoi que ce soit, le 17 octobre.
 **Stratégies d'accès conditionnel : aucune.** Le démontage avait supprimé la stratégie du jour 15 et la
 reconstruction ne l'avait jamais recréée.
 
-![Page des stratégies d'accès conditionnel affichant l'écran Get Started, aucune stratégie](../../screenshots/17-identity-ca-no-policies.png)
+![Page des stratégies d'accès conditionnel affichant l'écran Get Started, aucune stratégie](../../screenshots/04-access-rules-no-policies-after-teardown.png)
 
 **Paramètres de sécurité par défaut : Disabled (not recommended).**
 
-![Panneau Security defaults réglé sur Disabled, avec l'avertissement que l'organisation est vulnérable](../../screenshots/18-identity-security-defaults-disabled.png)
+![Panneau Security defaults réglé sur Disabled, avec l'avertissement que l'organisation est vulnérable](../../screenshots/05-access-rules-security-defaults-off.png)
 
 Les deux étant désactivés, rien dans la configuration propre du tenant n'exigeait l'authentification
 multifacteur. La seule MFA restante était celle que Microsoft impose sur ses portails d'administration.
@@ -92,7 +92,7 @@ c'était la cause.
 
 La connexion par le passe dans le journal :
 
-![Détails d'authentification de la connexion : Temporary Access Pass, succeeded true](../../screenshots/19-identity-tap-signin-auth-details.png)
+![Détails d'authentification de la connexion : Temporary Access Pass, succeeded true](../../screenshots/01-emergency-access-tap-sign-in.png)
 
 **Authenticator a enregistré plus que la clé d'accès.** La vue administrateur montrait deux méthodes
 utilisables, Microsoft Authenticator (demandes push et codes à usage unique, sur un Google Pixel 7) et
@@ -100,13 +100,13 @@ la clé d'accès, avec la notification push comme méthode de connexion par déf
 peuvent être hameçonnés ; une clé d'accès, non. J'ai supprimé la méthode Authenticator et le passe
 consommé. Ce qui reste :
 
-![Compte d'urgence : une méthode utilisable, Passkey, méthode MFA préférée par le système Fido2](../../screenshots/20-identity-emergency-passkey-only.png)
+![Compte d'urgence : une méthode utilisable, Passkey, méthode MFA préférée par le système Fido2](../../screenshots/02-emergency-access-passkey-only.png)
 
 Les détails de la clé d'accès montrent l'AAGUID que signale Authenticator sur Android. Microsoft Graph
 indique son niveau d'attestation comme `attested` (section 5), bien que le profil ci-dessous n'exige
 pas d'attestation.
 
-![AAGUID de1e552d-db1d-4423-a619-566b625cdc84](../../screenshots/21-identity-passkey-aaguid.png)
+![AAGUID de1e552d-db1d-4423-a619-566b625cdc84](../../screenshots/03-emergency-access-passkey-aaguid.png)
 
 **Les paramètres de clé d'accès du tenant sont les plus permissifs qui existent.** Les profils de clé
 d'accès étaient déjà activés. Le profil par défaut couvre tous les utilisateurs, attestation non
@@ -158,19 +158,19 @@ that my account will be impacted by this policy" à la place. J'ai supposé que 
 habituel pouvait effectuer la MFA, parce que les portails la demandaient. La section 5 montre qu'il
 ne le pouvait pas lors d'une nouvelle connexion.
 
-![Avertissement Don't lock yourself out avec Exclude current user présélectionné](../../screenshots/22-identity-ca-lockout-warning.png)
+![Avertissement Don't lock yourself out avec Exclude current user présélectionné](../../screenshots/06-access-rules-lockout-warning.png)
 
 ### What If, avant toute activation
 
 Entrées : l'utilisateur de test, Office 365 Exchange Online, Windows, navigateur. Résultat : CA001 et
 CA003 s'appliquent, CA002 non, parce qu'un navigateur n'est pas un client hérité.
 
-![Résultat What If pour l'utilisateur de test : CA001 et CA003 s'appliqueront, toutes deux en rapport uniquement](../../screenshots/23-identity-whatif-test-user.png)
+![Résultat What If pour l'utilisateur de test : CA001 et CA003 s'appliqueront, toutes deux en rapport uniquement](../../screenshots/07-access-rules-whatif-test-user.png)
 
 Mêmes entrées avec le compte d'urgence : aucune stratégie ne s'applique, et chacune donne la même
 raison, **Users and groups**.
 
-![Résultat What If pour le compte d'urgence : les trois stratégies ne s'appliqueront pas, raison Users and groups](../../screenshots/24-identity-whatif-emergency-excluded.png)
+![Résultat What If pour le compte d'urgence : les trois stratégies ne s'appliqueront pas, raison Users and groups](../../screenshots/08-access-rules-whatif-emergencyaccess-excluded.png)
 
 Cette raison est vraie que la stratégie exclue le compte lui-même ou un groupe dont il est membre. What
 If ne peut pas distinguer les deux. La section 5 montre pourquoi cela a compté.
@@ -183,7 +183,7 @@ Outlook sur le web dans Edge.
 Le journal des connexions **interactives** contenait une entrée, **Windows Sign In**, avec l'onglet
 Report-only indiquant "Not applicable". Les connexions Edge de cette session étaient sur l'onglet des connexions **non interactives**. L'onglet Report-only d'une entrée Microsoft Edge :
 
-![Résultats rapport uniquement sur une connexion Microsoft Edge : CA001 Success, CA003 Success, CA002 Not applied](../../screenshots/25-identity-reportonly-edge-signin.png)
+![Résultats rapport uniquement sur une connexion Microsoft Edge : CA001 Success, CA003 Success, CA002 Not applied](../../screenshots/09-access-rules-report-only-sign-in.png)
 
 La même répartition que What If : CA001 et CA003 évaluées et satisfaites, CA002 non appliquée. CA001
 était satisfaite parce que l'utilisateur de test s'était connecté à Windows avec Windows Hello for
@@ -197,7 +197,7 @@ Failure ; elles sont sur la liste plus bas.
 
 18 octobre, après la vérification en rapport uniquement :
 
-![Stratégies d'accès conditionnel : CA001, CA002 et CA003, toutes les trois On](../../screenshots/26-identity-ca-policies-on.png)
+![Stratégies d'accès conditionnel : CA001, CA002 et CA003, toutes les trois On](../../screenshots/10-access-rules-ca001-ca002-ca003-on.png)
 
 ---
 
@@ -228,7 +228,7 @@ La première exécution ne montrait aucun groupe exclu d'aucune stratégie, et l
 colonne pour les utilisateurs exclus, le même angle mort que What If. Avec cette colonne ajoutée, la
 deuxième exécution :
 
-![Sortie du script : les trois stratégies excluent l'utilisateur Emergency Access 01, et aucun groupe](../../screenshots/29-identity-audit-exclusion-was-the-user.png)
+![Sortie du script : les trois stratégies excluent l'utilisateur Emergency Access 01, et aucun groupe](../../screenshots/17-checks-audit-exclusion-was-the-user.png)
 
 Les trois stratégies excluaient **l'utilisateur Emergency Access 01**. Aucune n'excluait le groupe
 `EmergencyAccess`. Dans le sélecteur de la stratégie, l'utilisateur et le groupe ont presque le même
@@ -238,7 +238,7 @@ stratégie ne protégerait le compte que si quelqu'un pensait à l'utilisateur.
 
 J'ai modifié les trois stratégies pour exclure le groupe. L'exécution suivante :
 
-![Sortie du script : les trois stratégies excluent maintenant le groupe EmergencyAccess](../../screenshots/30-identity-audit-exclusion-fixed.png)
+![Sortie du script : les trois stratégies excluent maintenant le groupe EmergencyAccess](../../screenshots/18-checks-audit-exclusion-fixed.png)
 
 La même sortie montre le compte d'urgence détenant un mot de passe et une clé d'accès, `fido2`, avec le
 niveau d'attestation `attested`, son rôle Global Administrator, et un autre groupe, caviardé parce que
@@ -246,7 +246,7 @@ son nom est celui du tenant.
 
 ### Les connexions, et quelle entrée porte la méthode
 
-![Sortie du script : connexions du compte d'urgence avec les méthodes, dont Passkey (device-bound) sur deux entrées en erreur 50140](../../screenshots/31-identity-audit-emergency-signins.png)
+![Sortie du script : connexions du compte d'urgence avec les méthodes, dont Passkey (device-bound) sur deux entrées en erreur 50140](../../screenshots/19-checks-audit-emergency-sign-ins.png)
 
 - **17 octobre, 08:01 UTC :** passe d'accès temporaire, consigné sous Microsoft Authentication
   Broker quand le compte a été ajouté à Authenticator.
@@ -256,7 +256,7 @@ son nom est celui du tenant.
   **notApplied**. À ce moment-là, les stratégies excluaient encore l'utilisateur, et des trois, seule
   CA001 aurait pu s'appliquer à cette connexion. Cela montre donc que l'exclusion de l'utilisateur tient une fois les stratégies activées. L'exclusion du groupe n'a pas encore été testée par une vraie connexion.
 
-![Sortie du script : les connexions de l'utilisateur de test, Windows Hello for Business le 18 octobre, et aucune inscription d'application détenant des secrets client](../../screenshots/32-identity-audit-test-user-signins.png)
+![Sortie du script : les connexions de l'utilisateur de test, Windows Hello for Business le 18 octobre, et aucune inscription d'application détenant des secrets client](../../screenshots/20-checks-audit-test-user-sign-ins.png)
 
 - **Utilisateur de test :** la connexion Windows du 18 octobre a utilisé **Windows Hello for Business**.
   Cela explique la revendication MFA derrière le succès de CA001 en rapport uniquement.

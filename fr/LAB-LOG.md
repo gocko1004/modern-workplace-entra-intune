@@ -163,7 +163,7 @@ Confirmé aussi : Intune n'a pas de classement par priorité pour les anneaux d
 
 **Cause :** la colonne Versions indiquait **Windows 11, version 25H2**. Le nom était une étiquette tapée par un humain. La version était ce que le service allait réellement faire.
 
-![Rapport de mise à jour des fonctionnalités : stratégie Feature-Pin-24H2, colonne Versions Windows 11, version 25H2](../screenshots/11-lab-day11-feature-pin-deploys-25h2.png)
+![Rapport de mise à jour des fonctionnalités : stratégie Feature-Pin-24H2, colonne Versions Windows 11, version 25H2](../screenshots/26-first-round-update-pin-24h2-deploys-25h2.png)
 
 **Correction :** stratégie renommée pour correspondre à son comportement.
 
@@ -190,7 +190,7 @@ SubmitSamplesConsent    : 1
 
 Pire que non configuré. Un "off" explicite écrase ce que l'appareil ferait autrement, et se déclare quand même appliqué.
 
-![Stratégie Defender Antivirus avec PUA Protection explicitement réglée sur off](../screenshots/04-lab-day13-pua-protection-off.png)
+![Stratégie Defender Antivirus avec PUA Protection explicitement réglée sur off](../screenshots/25-checks-defender-pua-protection-off.png)
 
 **Correction :** réglée sur Block, enregistré, synchronisé. `PUAProtection` est passé de 0 à 1.
 
@@ -231,7 +231,7 @@ Noté honnêtement : après avoir cherché dans l'arborescence PolicyManager et
 You do not have access to view this BitLocker recovery key.
 ```
 
-![Portail refusant d'afficher une clé de récupération BitLocker, ID de clé masqués](../screenshots/05-lab-day13-portal-key-access-denied.png)
+![Portail refusant d'afficher une clé de récupération BitLocker, ID de clé masqués](../screenshots/21-checks-bitlocker-portal-access-denied.png)
 
 **Investigation, dans l'ordre :**
 
@@ -246,9 +246,9 @@ GET https://graph.microsoft.com/v1.0/informationProtection/bitlocker/recoveryKey
 
 Les deux ont renvoyé **200 OK** une fois `BitlockerKey.ReadBasic.All` et `BitlockerKey.Read.All` consentis dans Graph Explorer.
 
-![Graph Explorer : 403 Forbidden sur recoveryKeys, demandant le consentement des permissions](../screenshots/05-lab-day13-graph-403-before-consent.png)
+![Graph Explorer : 403 Forbidden sur recoveryKeys, demandant le consentement des permissions](../screenshots/22-checks-bitlocker-graph-403.png)
 
-![Graph Explorer : 200 OK sur le même point de terminaison recoveryKeys](../screenshots/05-lab-day13-graph-recoverykeys-200-ok.png)
+![Graph Explorer : 200 OK sur le même point de terminaison recoveryKeys](../screenshots/23-checks-bitlocker-graph-200-ok.png)
 
 **Correction :** aucun appliqué. La clé est lisible via l'API. C'est le panneau du portail qui échoue.
 
@@ -262,7 +262,7 @@ Le panneau de l'appareil listait trois clés de récupération BitLocker pour un
 
 Pas un défaut. Chaque événement de chiffrement et chaque rotation du mot de passe de récupération crée un nouveau protecteur et le dépose, et les anciens restent dans l'annuaire. C'est pour ça que l'écran de récupération affiche un **Key ID**, et que donner la mauvaise clé à un utilisateur est rejeté sans explication.
 
-![Trois clés de récupération BitLocker listées pour un seul appareil, ID de clé masqués](../screenshots/12-lab-day13-three-recovery-keys.png)
+![Trois clés de récupération BitLocker listées pour un seul appareil, ID de clé masqués](../screenshots/24-checks-bitlocker-three-recovery-keys.png)
 
 Identifier celle qui est active sur l'appareil :
 
@@ -326,7 +326,7 @@ AllowLocalFirewallRules : True
 
 `Default Inbound Action` affichait **Succeeded** dans le même rapport, parce que les deux stratégies le réglaient sur Block. Des valeurs identiques dans deux stratégies ne sont pas en conflit. Seules les valeurs différentes le sont.
 
-![État par paramètre : chaque paramètre de fusion du pare-feu listé deux fois en Conflict, Default Inbound Action en Succeeded](../screenshots/13-lab-day14-firewall-merge-conflict.png)
+![État par paramètre : chaque paramètre de fusion du pare-feu listé deux fois en Conflict, Default Inbound Action en Succeeded](../screenshots/27-first-round-firewall-merge-conflict.png)
 
 **Correction :** retiré toute la catégorie Firewall de `Win-Security-Baseline-Lite` pour qu'une seule stratégie possède le pare-feu. Résolu par la propriété, pas en alignant les valeurs à deux endroits, parce que des valeurs alignées laissent le même piège à la personne suivante.
 
@@ -413,7 +413,7 @@ Vérifié avec le simulateur **What If** plutôt qu'en se connectant, ce qui com
 
 Exécution en rapport uniquement : stratégie listée sous "Policies that will apply", State **Report-only**.
 
-![What If : CA-Require-Compliant-Device sous Policies that will apply, State Report-only](../screenshots/14-lab-day15-whatif-report-only.png)
+![What If : CA-Require-Compliant-Device sous Policies that will apply, State Report-only](../screenshots/28-first-round-ca-whatif-report-only.png)
 Après désactivation des paramètres de sécurité par défaut et activation de la stratégie, la même exécution indiquait State **On**.
 
 **La conséquence, notée parce que c'est une vraie régression dans ce tenant.** Désactiver les paramètres de sécurité par défaut a supprimé l'exigence d'authentification multifacteur à l'échelle du tenant. La stratégie de remplacement ne vérifie que la conformité de l'appareil. Plus rien dans ce tenant n'exige l'authentification multifacteur. Dans un vrai déploiement, la prochaine stratégie construite est celle qui la remet, et l'ordre des opérations ici est exactement la manière dont des organisations se retrouvent moins sécurisées juste après être "passées à l'accès conditionnel".
@@ -533,7 +533,7 @@ Restart-Service -Name IntuneManagementExtension -Force
 Redémarrer l'extension force une évaluation immédiate de la stratégie d'applications au lieu d'attendre
 le cycle horaire. L'application s'est installée trois minutes plus tard.
 
-![État d'installation de 7-Zip 26.03 sur l'appareil : Installed sur la VM du lab, UPN masqué](../screenshots/15-lab-day17-7zip-installed.png)
+![État d'installation de 7-Zip 26.03 sur l'appareil : Installed sur la VM du lab, UPN masqué](../screenshots/29-first-round-7zip-installed.png)
 
 **Leçon :** un résultat venant de la mauvaise machine est pire qu'aucun résultat, parce qu'il arrête
 l'investigation. Chaque étape de vérification doit nommer la machine avant la commande.
@@ -651,7 +651,7 @@ le groupe dynamique utilisé pour tout le reste ce mois-ci.
 
 **Texte de l'erreur :** aucun. La page d'affectation l'a accepté et a affiché *"1 devices, 0 users"*.
 
-![Stratégie de protection des applications affectée à Dyn-Windows-Devices : Group Members 1 devices, 0 users](../screenshots/16-lab-day19-app-protection-device-group.png)
+![Stratégie de protection des applications affectée à Dyn-Windows-Devices : Group Members 1 devices, 0 users](../screenshots/30-first-round-app-protection-on-devices.png)
 
 **Cause :** les stratégies de protection des applications s'appliquent à **l'identité d'un utilisateur à
 l'intérieur d'une application**, pas à un appareil. Toute la prémisse est que l'appareil est non géré, non

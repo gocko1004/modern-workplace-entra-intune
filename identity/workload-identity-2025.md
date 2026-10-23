@@ -15,7 +15,7 @@ Attempting Azure CLI login by using service principal with secret...
 Azure CLI login succeeds by using service principal with secret.
 ```
 
-![Azure Login step: auth-type SERVICE_PRINCIPAL, login succeeds by using service principal with secret](../screenshots/27-identity-2025-service-principal-secret-login.png)
+![Azure Login step: auth-type SERVICE_PRINCIPAL, login succeeds by using service principal with secret](../screenshots/31-pipeline-2025-secret-login.png)
 
 An earlier step in the same job ran code the pipeline did not control, standing in for a compromised
 dependency. The workflow passed it the credentials as environment variables (`env:`):
@@ -27,7 +27,7 @@ AZURE_TENANT_ID: ***
 AZURE_SUBSCRIPTION_ID: ***
 ```
 
-![Untrusted step receiving AZURE_CLIENT_SECRET as a masked environment variable, then its callback failing](../screenshots/28-identity-2025-pipeline-secret-readable.png)
+![Untrusted step receiving AZURE_CLIENT_SECRET as a masked environment variable, then its callback failing](../screenshots/32-pipeline-2025-secret-readable.png)
 
 GitHub printed `***`. Masking hides the value from the log, not from the code that runs: the script
 could read the secret and send it anywhere. In the exercise its callback went to a domain that does

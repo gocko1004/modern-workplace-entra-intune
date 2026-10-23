@@ -207,7 +207,7 @@ L'appareil était joint. L'utilisateur avait sa licence. Inscription refusée.
 >
 > L'**autorité MDM** du tenant n'avait jamais été définie. Tous les autres paramètres de toute la chaîne étaient corrects et cela ne changeait rien, parce que le tenant n'avait pas déclaré quel service avait le droit de gérer les appareils.
 
-![Panneau Choose MDM Authority avec None sélectionné : aucun service n'avait le droit de gérer les appareils](../../screenshots/01-day03-mdm-authority-none.png)
+![Panneau Choose MDM Authority avec None sélectionné : aucun service n'avait le droit de gérer les appareils](../../screenshots/11-workstation-mdm-authority-none.png)
 
 > **Pourquoi**
 >

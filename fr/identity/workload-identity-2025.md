@@ -16,7 +16,7 @@ Attempting Azure CLI login by using service principal with secret...
 Azure CLI login succeeds by using service principal with secret.
 ```
 
-![Étape Azure Login : auth-type SERVICE_PRINCIPAL, login succeeds by using service principal with secret](../../screenshots/27-identity-2025-service-principal-secret-login.png)
+![Étape Azure Login : auth-type SERVICE_PRINCIPAL, login succeeds by using service principal with secret](../../screenshots/31-pipeline-2025-secret-login.png)
 
 Une étape antérieure du même job exécutait du code que le pipeline ne contrôlait pas, tenant lieu de
 dépendance compromise. Le workflow lui passait les identifiants comme variables d'environnement
@@ -29,7 +29,7 @@ AZURE_TENANT_ID: ***
 AZURE_SUBSCRIPTION_ID: ***
 ```
 
-![Étape non fiable recevant AZURE_CLIENT_SECRET comme variable d'environnement masquée, puis son appel sortant (callback) qui échoue](../../screenshots/28-identity-2025-pipeline-secret-readable.png)
+![Étape non fiable recevant AZURE_CLIENT_SECRET comme variable d'environnement masquée, puis son appel sortant (callback) qui échoue](../../screenshots/32-pipeline-2025-secret-readable.png)
 
 GitHub affichait `***`. Le masquage cache la valeur dans le journal, pas au code qui s'exécute : le
 script pouvait lire le secret et l'envoyer n'importe où. Dans l'exercice, son appel sortant partait

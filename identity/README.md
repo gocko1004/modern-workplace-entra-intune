@@ -16,11 +16,11 @@ Checked before changing anything, on 17 October.
 **Conditional Access policies: none.** The teardown had removed the Day 15 policy and the rebuild
 never recreated it.
 
-![Conditional Access policies page showing the Get Started screen, no policies](../screenshots/17-identity-ca-no-policies.png)
+![Conditional Access policies page showing the Get Started screen, no policies](../screenshots/04-access-rules-no-policies-after-teardown.png)
 
 **Security defaults: Disabled (not recommended).**
 
-![Security defaults panel set to Disabled, with the warning that the organisation is vulnerable](../screenshots/18-identity-security-defaults-disabled.png)
+![Security defaults panel set to Disabled, with the warning that the organisation is vulnerable](../screenshots/05-access-rules-security-defaults-off.png)
 
 With both off, nothing in the tenant's own configuration required multifactor authentication. The
 only MFA left was the one Microsoft enforces on its admin portals. The gap recorded on Day 15 had
@@ -90,20 +90,20 @@ pass can take a while to appear. I did not prove that was the cause.
 
 The pass sign-in in the log:
 
-![Sign-in authentication details: Temporary Access Pass, succeeded true](../screenshots/19-identity-tap-signin-auth-details.png)
+![Sign-in authentication details: Temporary Access Pass, succeeded true](../screenshots/01-emergency-access-tap-sign-in.png)
 
 **Authenticator registered more than the passkey.** The admin view showed two usable methods,
 Microsoft Authenticator (push requests and one-time codes, on a Google Pixel 7) and the passkey, with
 push notification as the default sign-in method. Push and codes can be phished; a passkey cannot.
 Deleted the Authenticator method and the spent pass. What remains:
 
-![Emergency account: one usable method, Passkey, system-preferred MFA method Fido2](../screenshots/20-identity-emergency-passkey-only.png)
+![Emergency account: one usable method, Passkey, system-preferred MFA method Fido2](../screenshots/02-emergency-access-passkey-only.png)
 
 The passkey's details show the AAGUID that Authenticator on Android reports. Microsoft Graph lists
 its attestation level as `attested` (section 5), although the profile below does not require
 attestation.
 
-![AAGUID de1e552d-db1d-4423-a619-566b625cdc84](../screenshots/21-identity-passkey-aaguid.png)
+![AAGUID de1e552d-db1d-4423-a619-566b625cdc84](../screenshots/03-emergency-access-passkey-aaguid.png)
 
 **The tenant's passkey settings are the loosest available.** Passkey profiles were already on. The
 default profile covers all users with attestation not enforced, device-bound and synced passkeys
@@ -151,19 +151,19 @@ Administrator outside the MFA policy. Chose "I understand that my account will b
 policy" instead. I assumed the daily admin account could complete MFA, because the portals had been
 asking for it. Section 5 shows it could not on a fresh sign-in.
 
-![Don't lock yourself out warning with Exclude current user pre-selected](../screenshots/22-identity-ca-lockout-warning.png)
+![Don't lock yourself out warning with Exclude current user pre-selected](../screenshots/06-access-rules-lockout-warning.png)
 
 ### What If, before anything went on
 
 Inputs: the test user, Office 365 Exchange Online, Windows, browser. Result: CA001 and CA003 apply,
 CA002 does not, because a browser is not a legacy client.
 
-![What If result for the test user: CA001 and CA003 will apply, both report-only](../screenshots/23-identity-whatif-test-user.png)
+![What If result for the test user: CA001 and CA003 will apply, both report-only](../screenshots/07-access-rules-whatif-test-user.png)
 
 Same inputs with the emergency account: no policy applies, and each one gives the same reason,
 **Users and groups**.
 
-![What If result for the emergency account: all three policies will not apply, reason Users and groups](../screenshots/24-identity-whatif-emergency-excluded.png)
+![What If result for the emergency account: all three policies will not apply, reason Users and groups](../screenshots/08-access-rules-whatif-emergencyaccess-excluded.png)
 
 That reason is true whether the policy excludes the account itself or a group it belongs to. What If
 cannot tell the two apart. Section 5 shows why that mattered.
@@ -176,7 +176,7 @@ The **interactive** sign-in log held one entry, **Windows Sign In**, with the re
 "Not applicable". The Edge sign-ins from that session were on the **non-interactive** tab. The
 report-only tab of one Microsoft Edge entry:
 
-![Report-only results on a Microsoft Edge sign-in: CA001 Success, CA003 Success, CA002 Not applied](../screenshots/25-identity-reportonly-edge-signin.png)
+![Report-only results on a Microsoft Edge sign-in: CA001 Success, CA003 Success, CA002 Not applied](../screenshots/09-access-rules-report-only-sign-in.png)
 
 The same split as What If: CA001 and CA003 evaluated and satisfied, CA002 not applied. CA001 was
 satisfied because the test user had signed in to Windows with Windows Hello for Business, which
@@ -190,7 +190,7 @@ have status Failure; they are on the list below.
 
 18 October, after the report-only check:
 
-![Conditional Access policies: CA001, CA002 and CA003, all three On](../screenshots/26-identity-ca-policies-on.png)
+![Conditional Access policies: CA001, CA002 and CA003, all three On](../screenshots/10-access-rules-ca001-ca002-ca003-on.png)
 
 ---
 
@@ -217,7 +217,7 @@ of the emergency account, the day after it was built.
 The first run showed no group excluded from any policy, and the script had no column for excluded
 users, the same blind spot What If has. With that column added, the second run:
 
-![Script output: all three policies exclude the user Emergency Access 01, and no group](../screenshots/29-identity-audit-exclusion-was-the-user.png)
+![Script output: all three policies exclude the user Emergency Access 01, and no group](../screenshots/17-checks-audit-exclusion-was-the-user.png)
 
 All three policies excluded **the user Emergency Access 01**. None excluded the `EmergencyAccess`
 group. In the policy picker the user and the group have almost the same name, and the user was
@@ -227,7 +227,7 @@ remembered the user.
 
 Changed all three policies to exclude the group. The next run:
 
-![Script output: all three policies now exclude the group EmergencyAccess](../screenshots/30-identity-audit-exclusion-fixed.png)
+![Script output: all three policies now exclude the group EmergencyAccess](../screenshots/18-checks-audit-exclusion-fixed.png)
 
 The same output shows the emergency account holding a password and one passkey, `fido2`, with
 attestation level `attested`, its Global Administrator role, and one other group, blacked out
@@ -235,7 +235,7 @@ because its name is the tenant's.
 
 ### Sign-ins, and which entry carries the method
 
-![Script output: emergency account sign-ins with methods, including Passkey (device-bound) on two error 50140 entries](../screenshots/31-identity-audit-emergency-signins.png)
+![Script output: emergency account sign-ins with methods, including Passkey (device-bound) on two error 50140 entries](../screenshots/19-checks-audit-emergency-sign-ins.png)
 
 - **17 October, 08:01 UTC:** Temporary Access Pass, logged under Microsoft Authentication Broker
   when the account was added to Authenticator.
@@ -246,7 +246,7 @@ because its name is the tenant's.
   could have applied to this sign-in. So this shows the user exclusion holding under enforcement.
   The group exclusion has not yet been tested by a real sign-in.
 
-![Script output: the test user's sign-ins, Windows Hello for Business on 18 October, and no app registrations holding client secrets](../screenshots/32-identity-audit-test-user-signins.png)
+![Script output: the test user's sign-ins, Windows Hello for Business on 18 October, and no app registrations holding client secrets](../screenshots/20-checks-audit-test-user-sign-ins.png)
 
 - **Test user:** the 18 October Windows sign-in used **Windows Hello for Business**. That explains
   the MFA claim behind CA001's report-only success.

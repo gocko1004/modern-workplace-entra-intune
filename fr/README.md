@@ -9,11 +9,13 @@
 > la correction. Les pages d'origine sont en anglais, la langue des consoles Microsoft.
 
 Mon propre environnement, pas de la production : un tenant Microsoft 365 d'essai, des machines
-virtuelles Windows 11 sous Hyper-V et un téléphone Android. Monté à partir de rien le 17 août 2026,
+virtuelles Windows 11 sous Hyper-V et, avant la reconstruction, un téléphone Android. Monté à partir de rien le 17 août 2026,
 mené à travers les cinq domaines du MD-102 jusqu'au 14 septembre, puis démonté par scripts et
 reconstruit de zéro à partir du 15 septembre. En octobre, une partie identité : un compte d'accès
 d'urgence avec une clé d'accès (passkey), et de l'accès conditionnel construit en mode rapport
 uniquement, testé, puis activé.
+
+**Le tenant en un schéma, avec les captures dans l'ordre de la présentation : [ARCHITECTURE.md](ARCHITECTURE.md).**
 
 Un examen à choix multiples ne peut pas montrer ce que ce dépôt montre : les pannes, le texte exact
 de l'erreur, ce que j'ai vérifié, et ce que c'était en réalité.
@@ -48,18 +50,20 @@ Les règles qui en sont sorties, les outils, et comment j'utilise l'IA pour appr
 
 ## La sécurité, en termes simples
 
-Ce que le labo met en place, écrit pour la question qu'une petite entreprise pose réellement.
+Ce que j'ai mis en place, écrit pour la question qu'une petite entreprise pose réellement. La colonne
+Aujourd'hui dit ce qui est dans le tenant maintenant : reconstruit en septembre, ajouté en octobre, ou construit
+seulement lors de la première phase.
 
-| Le risque | Ce que le labo fait | Où |
-|---|---|---|
-| Un portable est perdu ou volé | BitLocker par stratégie, clé de récupération stockée dans Entra ID et consultable uniquement par le service informatique | [Jour 4](day-guides/day-04-compliance-configuration-and-bitlocker.md#4-bitlocker), [Jour 13](LAB-LOG.md#jour-13-trois-clés-de-récupération-un-seul-disque), [reconstruction](rebuild/README.md#la-stratégie-bitlocker-prend-le-relais) |
-| Tous les PC ont le même mot de passe administrateur local | Windows LAPS : un mot de passe par appareil, renouvelé, récupérable par le service informatique | [Jour 9](LAB-LOG.md#jour-9-windows-laps-renvoyait-0x80070190-et-le-portail-ne-disait-rien-dutile) |
-| Quelqu'un installe un "outil gratuit" livré avec un logiciel publicitaire | Defender bloque les applications potentiellement indésirables, Edge SmartScreen bloque leurs téléchargements | [Jour 13](LAB-LOG.md#jour-13-la-stratégie-antivirus-imposait-une-valeur-non-sécurisée), [reconstruction](rebuild/README.md#edge-smartscreen) |
-| Un appareil non sain ou non géré accède aux données de l'entreprise | Stratégie de conformité, appareils sans stratégie marqués non conformes par défaut, accès conditionnel exigeant un appareil conforme, et la faille MFA ouverte par la désactivation des paramètres de sécurité par défaut, consignée, puis refermée en octobre | [Jour 7](day-guides/day-07-orphaned-devices-policy-stores-and-admx.md#la-valeur-par-défaut-qui-laisse-passer), [Jour 15](LAB-LOG.md#jour-15-laccès-conditionnel-et-la-faille-dauthentification-multifacteur-quil-a-créée), [identité](identity/README.md) |
-| Un mot de passe volé suffit pour se connecter | L'accès conditionnel exige la MFA pour chaque utilisateur sauf un compte d'urgence, et bloque les anciens protocoles incapables de MFA. Le compte d'urgence, avec une clé d'accès et un mot de passe hors ligne, garde le tenant accessible si une stratégie tourne mal | [Identité](identity/README.md#4-accès-conditionnel) |
-| Comportement de type rançongiciel, vol d'identifiants | Règles de réduction de la surface d'attaque, déployées d'abord en mode audit, puis l'une d'elles passée en mode blocage | [Jour 14](LAB-LOG.md#jour-14-réduction-de-la-surface-dattaque-audit-dabord) |
-| Anciens protocoles laissés activés | SMBv1 désactivé, et repéré le paramètre dont le libellé dit le contraire | [Jour 7](day-guides/day-07-orphaned-devices-policy-stores-and-admx.md#le-piège-smbv1) |
-| Trop de personnes avec des droits d'administration complets | Rôles à moindre privilège, jonction d'appareils limitée, Endpoint Privilege Management pour l'élévation ponctuelle | [Jour 2](day-guides/day-02-users-groups-and-tenant-device-settings.md), [Jour 14](LAB-LOG.md#jour-14-endpoint-privilege-management) |
+| Le risque | Ce que j'ai mis en place | Aujourd'hui | Où |
+|---|---|---|---|
+| Un portable est perdu ou volé | BitLocker par stratégie, clé de récupération stockée dans Entra ID et consultable uniquement par le service informatique | Reconstruit | [Jour 4](day-guides/day-04-compliance-configuration-and-bitlocker.md#4-bitlocker), [Jour 13](LAB-LOG.md#jour-13-trois-clés-de-récupération-un-seul-disque), [reconstruction](rebuild/README.md#la-stratégie-bitlocker-prend-le-relais) |
+| Tous les PC ont le même mot de passe administrateur local | Windows LAPS : un mot de passe par appareil, renouvelé, récupérable par le service informatique | Première phase seulement, pas encore reconstruit | [Jour 9](LAB-LOG.md#jour-9-windows-laps-renvoyait-0x80070190-et-le-portail-ne-disait-rien-dutile) |
+| Quelqu'un installe un "outil gratuit" livré avec un logiciel publicitaire | Defender bloque les applications potentiellement indésirables, Edge SmartScreen bloque leurs téléchargements | Reconstruit | [Jour 13](LAB-LOG.md#jour-13-la-stratégie-antivirus-imposait-une-valeur-non-sécurisée), [reconstruction](rebuild/README.md#edge-smartscreen) |
+| Un appareil non sain ou non géré accède aux données de l'entreprise | Stratégie de conformité, appareils sans stratégie marqués non conformes par défaut, accès conditionnel exigeant un appareil conforme, et la faille MFA ouverte par la désactivation des paramètres de sécurité par défaut, consignée, puis refermée en octobre | Reconstruit : `CP-Windows`, et CA003 pour l'utilisatrice test | [Jour 7](day-guides/day-07-orphaned-devices-policy-stores-and-admx.md#la-valeur-par-défaut-qui-laisse-passer), [Jour 15](LAB-LOG.md#jour-15-laccès-conditionnel-et-la-faille-dauthentification-multifacteur-quil-a-créée), [identité](identity/README.md) |
+| Un mot de passe volé suffit pour se connecter | L'accès conditionnel exige la MFA pour chaque utilisateur sauf un compte d'urgence, et bloque les anciens protocoles incapables de MFA. Le compte d'urgence, avec une clé d'accès et un mot de passe hors ligne, garde le tenant accessible si une stratégie tourne mal | Ajouté en octobre, activé | [Identité](identity/README.md#4-accès-conditionnel) |
+| Comportement de type rançongiciel, vol d'identifiants | Règles de réduction de la surface d'attaque, déployées d'abord en mode audit, puis l'une d'elles passée en mode blocage | Première phase seulement | [Jour 14](LAB-LOG.md#jour-14-réduction-de-la-surface-dattaque-audit-dabord) |
+| Anciens protocoles laissés activés | SMBv1 désactivé, et repéré le paramètre dont le libellé dit le contraire | Première phase seulement | [Jour 7](day-guides/day-07-orphaned-devices-policy-stores-and-admx.md#le-piège-smbv1) |
+| Trop de personnes avec des droits d'administration complets | Rôles à moindre privilège, jonction d'appareils limitée, Endpoint Privilege Management pour l'élévation ponctuelle | Première phase seulement ; depuis la reconstruction, la jonction d'appareils est ouverte à tous | [Jour 2](day-guides/day-02-users-groups-and-tenant-device-settings.md), [Jour 14](LAB-LOG.md#jour-14-endpoint-privilege-management) |
 
 ---
 
@@ -77,6 +81,10 @@ Ce que le labo met en place, écrit pour la question qu'une petite entreprise po
 | Applications | Empaquetage Win32 et règles de détection, application du Store, Microsoft 365 Apps, stratégies de protection des applications, Enterprise App Catalog | [Journal du labo, jours 17 à 23](LAB-LOG.md) |
 | Surveillance et automatisation | Microsoft Graph PowerShell, corrections (Remediations), Endpoint Analytics | [Journal du labo, jours 21 à 23](LAB-LOG.md) |
 | Android | Inscription avec profil professionnel via Managed Google Play, sur un vrai téléphone | [Jour 8](day-guides/day-08-assignment-filters-and-android-enrolment.md) |
+
+Tout ce tableau a été construit au moins une fois. Après la démolition de septembre, la reconstruction a remis en
+place l'inscription, Autopilot, la conformité, BitLocker, Defender Antivirus et Edge SmartScreen, et octobre a
+ajouté la partie identité.
 
 ### La reconstruction
 
@@ -104,7 +112,8 @@ récupération et hachages matériels n'ont jamais été écrits dans ces fichie
 
 ## Captures d'écran
 
-[screenshots/](screenshots/), prises dans le labo et caviardées.
+[screenshots/](screenshots/README.md), prises dans le labo et caviardées, numérotées dans l'ordre de la visite
+de [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Contact
 
