@@ -4,7 +4,7 @@
 
 The tenant from the top down: me as Global Administrator, the tenant, then its seven parts. The
 [interactive diagram](https://gocko1004.github.io/modern-workplace-entra-intune/?lang=en) opens one level per
-click, down to each policy, and says why each part is built the way it is.
+click, down to each policy, says why each part is built the way it is and shows the screenshots that prove it.
 
 [![The tenant from the top: me as Global Administrator, the tenant, its seven parts and what sits under each](architecture/tenant-overview-en.png)](https://gocko1004.github.io/modern-workplace-entra-intune/?lang=en)
 

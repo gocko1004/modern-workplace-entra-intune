@@ -16,8 +16,8 @@ d'urgence avec une clé d'accès (passkey), et de l'accès conditionnel construi
 uniquement, testé, puis activé.
 
 **Le tenant niveau par niveau.** [Le schéma interactif](https://gocko1004.github.io/modern-workplace-entra-intune/?lang=fr)
-ouvre un niveau par clic et dit pourquoi chaque partie est construite ainsi. Les captures, dans l'ordre de la
-présentation, sont dans [ARCHITECTURE.md](ARCHITECTURE.md).
+ouvre un niveau par clic, dit pourquoi chaque partie est construite ainsi et montre les captures qui le prouvent.
+Les mêmes captures, dans l'ordre de la présentation, sont dans [ARCHITECTURE.md](ARCHITECTURE.md).
 
 [![Le tenant vu d'en haut : moi en administrateur général, le tenant, ses sept parties et ce qu'elles contiennent](../architecture/tenant-overview-fr.png)](https://gocko1004.github.io/modern-workplace-entra-intune/?lang=fr)
 

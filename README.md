@@ -16,8 +16,8 @@ In October, an identity part: an emergency access account with a passkey, and Co
 built in report-only, tested, then switched on.
 
 **The tenant level by level.** [The interactive diagram](https://gocko1004.github.io/modern-workplace-entra-intune/?lang=en)
-opens one level per click and says why each part is built the way it is. The screenshots, in presentation
-order, are in [ARCHITECTURE.md](ARCHITECTURE.md).
+opens one level per click, says why each part is built the way it is and shows the screenshots that prove it.
+The same screenshots, in presentation order, are in [ARCHITECTURE.md](ARCHITECTURE.md).
 
 [![The tenant from the top: me as Global Administrator, the tenant, its seven parts and what sits under each](architecture/tenant-overview-en.png)](https://gocko1004.github.io/modern-workplace-entra-intune/?lang=en)
 

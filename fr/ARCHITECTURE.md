@@ -4,7 +4,8 @@
 
 Le tenant de haut en bas : moi en administrateur général, le tenant, puis ses sept parties. Le
 [schéma interactif](https://gocko1004.github.io/modern-workplace-entra-intune/?lang=fr) ouvre un niveau par
-clic, jusqu'à chaque stratégie, et dit pourquoi chaque partie est construite ainsi.
+clic, jusqu'à chaque stratégie, dit pourquoi chaque partie est construite ainsi et montre les captures qui le
+prouvent.
 
 [![Le tenant vu d'en haut : moi en administrateur général, le tenant, ses sept parties et ce qu'elles contiennent](../architecture/tenant-overview-fr.png)](https://gocko1004.github.io/modern-workplace-entra-intune/?lang=fr)
 
