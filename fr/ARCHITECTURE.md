@@ -2,13 +2,15 @@
 
 # Architecture
 
-Le tenant en un schéma, parcouru en huit étapes. Je le présente en direct sous forme de page interactive, en
-français ou en anglais ; voici le même schéma en image, puis les mêmes huit étapes avec leurs captures. Chaque
-nom de cette page est celui du schéma, et les captures sont numérotées dans l'ordre de la visite.
+Le tenant de haut en bas : moi en administrateur général, le tenant, puis ses sept parties. Le
+[schéma interactif](https://gocko1004.github.io/modern-workplace-entra-intune/?lang=fr) ouvre un niveau par
+clic, jusqu'à chaque stratégie, et dit pourquoi chaque partie est construite ainsi.
 
-![Le schéma du tenant](../architecture/tenant-architecture-fr.png)
+[![Le tenant vu d'en haut : moi en administrateur général, le tenant, ses sept parties et ce qu'elles contiennent](../architecture/tenant-overview-fr.png)](https://gocko1004.github.io/modern-workplace-entra-intune/?lang=fr)
 
-*Utilisatrice test* dans le schéma est `lea.test` dans le reste du dépôt.
+Plus bas, la visite que je présente en huit étapes, avec les captures numérotées dans son ordre. Tous les
+éléments et tous les liens sont aussi sur [une carte complète](../architecture/tenant-architecture-fr.png), avec
+les noms utilisés sur cette page. *Utilisatrice test* sur la carte est `lea.test` dans le reste du dépôt.
 
 ## La visite, étape par étape
 

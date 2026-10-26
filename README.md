@@ -15,7 +15,11 @@ domains by 14 September, then torn down with scripts and rebuilt from scratch fr
 In October, an identity part: an emergency access account with a passkey, and Conditional Access
 built in report-only, tested, then switched on.
 
-**The tenant in one diagram, with the screenshots in presentation order: [ARCHITECTURE.md](ARCHITECTURE.md).**
+**The tenant level by level.** [The interactive diagram](https://gocko1004.github.io/modern-workplace-entra-intune/?lang=en)
+opens one level per click and says why each part is built the way it is. The screenshots, in presentation
+order, are in [ARCHITECTURE.md](ARCHITECTURE.md).
+
+[![The tenant from the top: me as Global Administrator, the tenant, its seven parts and what sits under each](architecture/tenant-overview-en.png)](https://gocko1004.github.io/modern-workplace-entra-intune/?lang=en)
 
 A multiple-choice exam cannot show what this repo shows: the failures, the exact error text, what I
 checked, and what it turned out to be.

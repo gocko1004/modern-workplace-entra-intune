@@ -15,7 +15,11 @@ reconstruit de zéro à partir du 15 septembre. En octobre, une partie identité
 d'urgence avec une clé d'accès (passkey), et de l'accès conditionnel construit en mode rapport
 uniquement, testé, puis activé.
 
-**Le tenant en un schéma, avec les captures dans l'ordre de la présentation : [ARCHITECTURE.md](ARCHITECTURE.md).**
+**Le tenant niveau par niveau.** [Le schéma interactif](https://gocko1004.github.io/modern-workplace-entra-intune/?lang=fr)
+ouvre un niveau par clic et dit pourquoi chaque partie est construite ainsi. Les captures, dans l'ordre de la
+présentation, sont dans [ARCHITECTURE.md](ARCHITECTURE.md).
+
+[![Le tenant vu d'en haut : moi en administrateur général, le tenant, ses sept parties et ce qu'elles contiennent](../architecture/tenant-overview-fr.png)](https://gocko1004.github.io/modern-workplace-entra-intune/?lang=fr)
 
 Un examen à choix multiples ne peut pas montrer ce que ce dépôt montre : les pannes, le texte exact
 de l'erreur, ce que j'ai vérifié, et ce que c'était en réalité.

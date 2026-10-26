@@ -2,13 +2,15 @@
 
 # Architecture
 
-The tenant in one diagram, walked through in eight steps. I present it live as an interactive page, in French
-or in English; this is the same diagram as an image, then the same eight steps with their screenshots. Every
-name on this page is the name in the diagram, and the screenshots are numbered in the order of the tour.
+The tenant from the top down: me as Global Administrator, the tenant, then its seven parts. The
+[interactive diagram](https://gocko1004.github.io/modern-workplace-entra-intune/?lang=en) opens one level per
+click, down to each policy, and says why each part is built the way it is.
 
-![The tenant diagram](architecture/tenant-architecture-en.png)
+[![The tenant from the top: me as Global Administrator, the tenant, its seven parts and what sits under each](architecture/tenant-overview-en.png)](https://gocko1004.github.io/modern-workplace-entra-intune/?lang=en)
 
-*Test user* in the diagram is `lea.test` in the rest of this repo.
+Below, the tour I present in eight steps, with the screenshots numbered in its order. Every element and every
+connection is also on [one full map](architecture/tenant-architecture-en.png), under the names used on this
+page. *Test user* on the map is `lea.test` in the rest of this repo.
 
 ## The tour, step by step
 
